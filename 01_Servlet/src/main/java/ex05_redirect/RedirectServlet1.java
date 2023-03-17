@@ -1,4 +1,4 @@
-package ex02_urlmapping;
+package ex05_redirect;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,25 +7,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/*
-	URLMapping 수정하는 방법
-	
-	방법1. 서블릿을 열고 @WebServlet 애너테이션을 수정한다.
-	방법2. web.xml을 열고 <servlet> 태그와 <servlet-mapping> 태그를 추가한다.
- */
+@WebServlet("/RedirectServlet1")
 
-
-@WebServlet("/HiServlet")  // @WebServlet({"/hi", "/hello"})처럼 2개 이상의 URLMapping 지정이 가능하다.
-
-public class HiServlet extends HttpServlet {
+public class RedirectServlet1 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		// 리다이렉트 이전(첫 번째 요청)의 파라미터 확인
+		// 첫 번째 요청 : /01_Servlet/RedirectServlet1?model=TV
+		String model = request.getParameter("model");
+		System.out.println("RedirectServlet1 : " + model);
+		
+		// redirect를 이용해서 다른 서블릿(다른 서버 경로)으로 이동하기
+		response.sendRedirect("/01_Servlet/RedirectServlet2");
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

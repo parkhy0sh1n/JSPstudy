@@ -1,31 +1,32 @@
-package ex02_urlmapping;
+package practice05;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/*
-	URLMapping 수정하는 방법
-	
-	방법1. 서블릿을 열고 @WebServlet 애너테이션을 수정한다.
-	방법2. web.xml을 열고 <servlet> 태그와 <servlet-mapping> 태그를 추가한다.
- */
-
-
-@WebServlet("/HiServlet")  // @WebServlet({"/hi", "/hello"})처럼 2개 이상의 URLMapping 지정이 가능하다.
-
-public class HiServlet extends HttpServlet {
+@WebServlet("/Practice05_1")
+public class Practice05_1 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		// 요청 인코딩
+		request.setCharacterEncoding("UTF-8");
+		
+		String model = request.getParameter("model");
+		System.out.println("Practice05_1 : " + model);
+		
+		// 응답할 URL의 인코딩이 필요하다.
+		response.sendRedirect("/01_Servlet/Practice05_2?model=" + URLEncoder.encode(model, "UTF-8"));
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

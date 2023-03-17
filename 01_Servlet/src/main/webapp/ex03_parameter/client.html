@@ -74,6 +74,26 @@
 		})
 	</script>
 	
+	<!-- 배열을 파라미터로 보내기 -->
+	<div>
+		<form action="/01_Servlet/ArrayServlet">
+			<input type="text" name="tel" size="4" maxlength="3">
+			-
+			<input type="text" name="tel" size="4" maxlength="4">
+			-
+			<input type="text" name="tel" size="4" maxlength="4">
+			<div>
+				<input type="checkbox" name="hobbies" value="travel" id="travel">
+				<label for="travel">여행</label>
+				<input type="checkbox" name="hobbies" value="travel" id="swim">
+				<label for="swim">수영</label>
+				<input type="checkbox" name="hobbies" value="travel" id="golf">
+				<label for="golf">골프</label>
+			</div>
+			<button>배열전송</button>
+		</form>
+	</div>
+	
 	<!-- 
 		POST 방식으로 요청
 		1. <form> 태그를 이용한 submit

@@ -3,16 +3,42 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="../resources/js/lib/jquery-3.6.4.min.js"></script>
+<script>
+	/*  
+		val();					: value 값을 가져온다.
+		focus(); 				: input 태그를 마우스로 클릭하여 입력상태로 만든 것을 포커스를 얻었다고 한다.
+		event.preventDefault(); : 어떤 이벤트를 명시적으로 처리하지 않은 경우, 해당 이벤트에 대한 사용자 에이전트의 기본 동작을 실행하지 않도록 지정한다.
+	*/
+	$(function(){
+		
+		// submit 이벤트 (이벤트 대상 = <form>)
+		$('#frm_join').on('submit', function(event){
+			
+			// 아이디 공백 체크
+			if($('#id').val() == ''){
+				alert('아이디는 필수입니다.');
+				$('#id').focus();
+				event.preventDefault();  // submit 방지
+				return;                  // 이벤트 리스너(함수) 종료
+			}
+			
+			// 비밀번호 입력 체크
+			else if($('#pw').val() == '' || $('#pw').val() != $('#pw2').val()) {
+				alert('비밀번호를 확인하세요.');
+				event.preventDefault();	 // submit 방지
+				return;					 // 이벤트 리스너(함수) 종료
+			}
+
+		});
+		
+	});
+	
+</script>
 </head>
 <body>
 
-    <form method="post" action="/01_Servlet/Practice01">
-        <p>
-            <a href="https://www.naver.com">
-                <img alt="네이버로고" src="../../images/logo_naver.png" width="150px">
-            </a>
-        </p>
-        <br>
+    <form id="frm_join" method="post" action="/01_Servlet/Practice01">
         <label for="id"><strong>아이디</strong></label>
         <br>
         <input type="text" name="id" id="id">@naver.com
