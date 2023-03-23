@@ -44,6 +44,11 @@ public class JSONServlet extends HttpServlet {
 				throw new AgeHandleException(age + "살은 잘못된 나이입니다", 600);
 			}
 			
+			// 이름 예외 처리
+			if(name.length() < 2 || name.length() > 6) {
+				throw new NameHandleException(name + "은(는) 잘못된 이름입니다.", 601);
+			}
+			
 			// 응답할 JSON 데이터
 			JSONObject obj = new JSONObject();
 			obj.put("name", name);
@@ -62,7 +67,7 @@ public class JSONServlet extends HttpServlet {
 			out.flush();
 			out.close();
 			
-		} catch(AgeHandleException e) {
+		} catch(MyHandleException e) {
 			
 			response.setContentType("text/plain; charset=UTF-8");
 			

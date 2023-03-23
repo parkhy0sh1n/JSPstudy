@@ -65,6 +65,36 @@
 			})
 		})
 	</script>
+	
+	<div>
+		<form id="frm_book">
+			<input type="text" name="title" placeholder="제목">
+			<input type="text" name="author" placeholder="저지">
+			<input type="text" name="price" placeholder="가격">		
+			<input type="button" id="btn3" value="XML요청">	
+		</form>
+		<div id="content3"></div>
+	</div>
+	<script>
+		$('#btn3').on('click', function(){
+			$('#content3').empty();
+			$.ajax({
+				/* 요청 */
+				type: 'get',
+				url: '/01_Servlet/XMLServlet',
+				data: $('#frm_book').serialize(),
+				/* 응답 */
+				dataType: 'xml',
+				success: (resData) => {
+					var ul = $('<ul>');
+					ul.append($('<li>').text('제목 : ' + $(resData).find('title').text()));
+					ul.append($('<li>').text('저자 : ' + $(resData).find('author').text()));
+					ul.append($('<li>').text('가격 : ' + $(resData).find('price').text() + '원'));
+					$('#content3').append(ul);
+				}
+			})
+		})
+	</script>
 
 </body>
 </html>
