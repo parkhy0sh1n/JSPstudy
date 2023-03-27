@@ -1,10 +1,16 @@
+<%@page import="java.util.Optional"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<%
+	request.setCharacterEncoding("UTF-8");
+	Optional<String> opt = Optional.ofNullable(request.getParameter("title"));
+	String title = opt.orElse("환영합니다");
+%>
+<title><%=title%></title>
 <style>
 	nav ul {
 		display: flex;

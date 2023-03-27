@@ -17,8 +17,7 @@
 		Optional opt = Optional.ofNullable(request.getParameter("price"));
 		// orElse()는 null이 있든 말든 해당 값이 null이거나 아니어도 실행 가능하다.
 		// orElseGet()는 null일 때만 실행된다.
-		Object strPrice = opt.orElse("0");
-		int price = Integer.parseInt(strPrice.toString());
+		int price = Integer.parseInt(opt.orElse("0"));
 	%>
 	
 	<h1>모델 : <%=model%></h1>
