@@ -8,5 +8,9 @@
 	
 	<h1>body1</h1>
 	
+	<script>
+		$('h1').css('color', 'red');	// jquery 라이브러리의 동작 확인용
+	</script>
+	
 <%-- 정적 include : 항상 같은 모습의 페이지를 포함할 수 있다. (include 지시어) --%>
 <%@ include file="footer.jsp" %>
