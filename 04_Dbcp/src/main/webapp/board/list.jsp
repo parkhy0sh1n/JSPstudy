@@ -13,6 +13,14 @@
 <title>게시글 목록</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="${contextPath}/resources/js/lib/jquery-3.6.4.min.js"></script>
+<script>
+	$(function() {
+		// 작성 화면으로 이
+		$('#btn_write').on('click', function() {
+			location.href = '${contextPath}/writeBoard.do';
+		})
+	})
+</script>
 </head>
 <body>
 
@@ -33,10 +41,12 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${boardList}" var="board">
-						<td>${board.board_no}</td>
-						<td>${board.title}</td>
-						<td>${board.created_date}</td>
-						<td><a href="#"><i class="fa-solid fa-x"></i></a></td>
+						<tr>
+							<td>${board.board_no}</td>
+							<td>${board.title}</td>
+							<td>${board.created_date}</td>
+							<td><a href="#"><i class="fa-solid fa-x"></i></a></td>
+						</tr>
 					</c:forEach>
 				</tbody>
 			</table>

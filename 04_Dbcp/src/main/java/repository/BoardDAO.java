@@ -12,6 +12,9 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import domain.BoardDTO;
+
+
 /*
 	DAO
 	1. Database Access Object
@@ -19,10 +22,8 @@ import javax.sql.DataSource;
 	3. 여러 객체가 만들어 지지 않도록 singleton 패턴으로 생성한다.
 */
 
-import domain.BoardDTO;
-
 public class BoardDAO {
-	
+
 	// 모든 메소드가 사용할 공통 필드
 	private Connection con;			// Oracle DataBase와 연결할 때 사용한다.
 	private PreparedStatement ps;	// 자바에서 쿼리문을 작성하기 위해 사용한다.
@@ -30,38 +31,35 @@ public class BoardDAO {
 	private String sql;
 	
 	// Connection 관리를 위한 DataSource 필드
-	private DataSource dataSource; 
+	private DataSource dataSource;
 	
 	// Singleton Pattern으로 DAO 생성하기
 	// Singleton Pattern : 객체의 인스턴스가 오직 1개만 생성되는 패턴을 의미한다.
 	// 외부에서 객체 생성되지 않도록 private 처리.
-	private BoardDAO dao = new BoardDAO();
+	private static BoardDAO dao = new BoardDAO();
 	private BoardDAO() {
-		
-		// context.xml에서 <Resource name="jdbc/GDJ61" />인 Resource를 읽어서 DataSource 객체 생성하기(JNDI 방식)
+		// context.xml에서 <Resource name="jdbc/GDJ61" />인 Resource를 읽어서 DataSource 객체 생성하기 (JNDI 방식)
 		try {
-			//  InitialContext()는 웹 어플리케이션이 처음으로 배치될때 설정되고, 모든 설정된 엔트리와 자원은 JNDI namespace의 java:comp/env 부분에 놓이게 된다.
-			Context context = new InitialContext();							
+			// InitialContext()는 웹 어플리케이션이 처음으로 배치될때 설정되고, 모든 설정된 엔트리와 자원은 JNDI namespace의 java:comp/env 부분에 놓이게 된다.
+			Context context = new InitialContext();
 			// context의 lookup메서드를 이용해서 "java:comp/env" 에 해당하는 객체를 찾아서 envContext에 삽입
 			Context envContext = (Context)context.lookup("java:comp/env");
 			// envContext의 lookup메서드를 이용해서 "java/GDJ61"에 해당하는 객체를 찾아서 dataSource에 삽입
-			dataSource = (DataSource)envContext.lookup("java/GDJ61");
+			dataSource = (DataSource)envContext.lookup("jdbc/GDJ61");
 			/*
 				Context context = new InitialContext();
 				dataSource = (DataSource)context.lookup("java:comp/env/jdbc/GDJ61");
 			*/
-			} catch(NamingException e) {
-				e.printStackTrace();
-			}
+		} catch(NamingException e) {
+			e.printStackTrace();
 		}
-		
+	}
 	public static BoardDAO getInstance() {		// 메소드가 static 처리되려면 클래스가 static 처리되어야 한다.
 		return dao;
 	}
 	
 	// 자원(Connection, PreparedStatement, ResultSet) 반납하기
 	private void close() {
-		
 		try {
 			if(rs != null) rs.close();
 			if(ps != null) ps.close();
@@ -125,27 +123,24 @@ public class BoardDAO {
 	public BoardDTO selectBoardByNo(int board_no) {
 		
 		return null;
-		
 	}
 	
 	// 게시글 삽입하기
 	public int insertBoard(BoardDTO board) {
 		
 		return 0;
-		
 	}
 	
 	// 게시글 수정하기
 	public int updateBoard(BoardDTO board) {
 		
 		return 0;
-		
 	}
 	
 	// 게시글 삭제하기
 	public int deleteBoard(int board_no) {
 		
 		return 0;
-		
 	}
+	
 }

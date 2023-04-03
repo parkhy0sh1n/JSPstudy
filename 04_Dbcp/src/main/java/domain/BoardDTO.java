@@ -19,6 +19,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
+
 public class BoardDTO {
 	
 	// 컬럼명을 필드로 선언하여 식별자로 사용(DB 컬럼명과 일치하지 않아도 된다.)
