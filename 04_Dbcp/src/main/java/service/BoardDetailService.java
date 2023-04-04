@@ -1,5 +1,6 @@
 package service;
 
+import java.io.PrintWriter;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,25 @@ public class BoardDetailService implements IBoardService {
 		
 		// 2. BoardDAO의 selectBoardByNo 메소드를 호출
 		BoardDTO board = BoardDAO.getInstance().selectBoardByNo(board_no);
+		
+		// 3. 존재하지 않는 게시긇은 경우 응답 처리
+		try {
+			
+			if(board == null){
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('존재하지 않는 게시글입니다.')");
+				out.println("history.back()");
+				out.println("</script>");
+				out.flush();
+				out.close();
+				return null;  // 컨트롤러로 null값을 반환하면 컨트롤러는 이동(redirect 또는 forward)을 하지 않는다.
+				              // 서비스에서 직접 이동하는 경우에 이 방법을 사용한다.
+			}
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 		// 3. DB에서 가져온 게시글(BoardDTO board)을 request에 저장(상세보기 화면(board/detail.jsp)으로 forword(전달)하기 위해서)한다.
 		request.setAttribute("board", board);
