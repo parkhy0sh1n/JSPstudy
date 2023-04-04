@@ -18,19 +18,6 @@
 
 <Context>
 
-	<!-- Oracle XE -->
-	<Resource
-		auth="Container"
-		name="jdbc/GDJ61"
-		type="javax.sql.DataSource"
-		driverClassName="oracle.jdbc.OracleDriver"
-		url="jdbc:oracle:thin:@localhost:1521:xe"
-		username="GDJ61"
-		password="1111"
-		maxTotal="8"
-		maxIdle="8"
-		maxWait="-1" />
-
     <!-- Default set of monitored resources. If one of these changes, the    -->
     <!-- web application will be reloaded.                                   -->
     <WatchedResource>WEB-INF/web.xml</WatchedResource>
