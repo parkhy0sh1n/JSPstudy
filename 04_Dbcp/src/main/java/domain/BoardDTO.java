@@ -24,8 +24,8 @@ public class BoardDTO {
 	
 	// 컬럼명을 필드로 선언하여 식별자로 사용(DB 컬럼명과 일치하지 않아도 된다.)
 	private int board_no;
-	private String title;			// 안녕
-	private String content;			// Hello
+	private String title;			// B조
+	private String content;			// 화이팅!
 	private Date modified_date;
 	private Date created_date;
 	
