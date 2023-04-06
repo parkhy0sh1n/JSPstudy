@@ -10,8 +10,40 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="${contextPath}/resources/js/lib/jquery-3.6.4.min.js"></script>
+<script>
+	function goEdit(){
+		location.href = '${contextPath}/edit.do?bbsNo=${bbs.bbsNo}';
+	}
+	function goRemove(){
+		if(confirm('삭제할까요?')) {			
+			$('#frm_remove').submit();
+		}
+	}
+	function goList(){
+		location.href = '${contextPath}/list.do';
+	}
+</script>
 </head>
 <body>
+
+	<div>
+		<h1>BBS 상세</h1>
+	</div>
+	<div>
+		<div>BBS_NO : ${bbs.bbsNo}</div>
+		<div>TITLE : ${bbs.title}</div>
+		<div>CREATED_DATE : ${bbs.createdDate}</div>
+		<div>MODIFIED_DATE : ${bbs.modifiedDate == null ? '없음' : bbs.modifiedDate}</div>
+		<pre>${bbs.content}</pre>
+	</div>
+	<div>
+		<input type="button" value="편집" onclick="goEdit()">
+		<input type="button" value="삭제" onclick="goRemove()">
+		<input type="button" value="목록" onclick="goList()">
+		<form id="frm_remove" method="post" action="${contextPath}/remove.do">
+			<input type="hidden" name="bbsNo" value="${bbs.bbsNo}">
+		</form>
+	</div>
 
 </body>
 </html>
