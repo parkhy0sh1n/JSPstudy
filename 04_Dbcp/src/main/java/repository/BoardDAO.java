@@ -28,10 +28,10 @@ public class BoardDAO {
 	private Connection con;			// Oracle DataBase와 연결할 때 사용한다.
 	private PreparedStatement ps;	// 자바에서 쿼리문을 작성하기 위해 사용한다.
 	private ResultSet rs;			// SELECT문의 결과를 저장하는 객체이다.
-	private String sql;
+	private String sql;				// 작성할 쿼리문을 담아낼 객체이다.
 	
 	// Connection 관리를 위한 DataSource 필드
-	private DataSource dataSource;
+	private DataSource dataSource;	
 	
 	// Singleton Pattern으로 DAO 생성하기
 	// Singleton Pattern : 객체의 인스턴스가 오직 1개만 생성되는 패턴을 의미한다.
